@@ -12,7 +12,7 @@ module Mingle
         end
 
         it "finds those links" do
-          expect(@finder).to_not be_nil
+          expect(@finder.attachment_links.size).to eq 0
         end
 
     end

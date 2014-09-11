@@ -1,7 +1,26 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (4.1.5)
+      i18n (~> 0.6, >= 0.6.9)
+      json (~> 1.7, >= 1.7.7)
+      minitest (~> 5.1)
+      thread_safe (~> 0.1)
+      tzinfo (~> 1.1)
+    api-auth (1.2.5)
     diff-lcs (1.2.5)
+    i18n (0.6.11)
+    json (1.8.1)
+    mingle_events (0.1.7)
+      activesupport
+      api-auth
+      minitar
+      nokogiri
+    mini_portile (0.6.0)
+    minitar (0.5.4)
+    minitest (5.4.1)
+    nokogiri (1.6.3.1)
+      mini_portile (= 0.6.0)
     rake (10.3.2)
     rspec (3.1.0)
       rspec-core (~> 3.1.0)
@@ -15,10 +34,15 @@ GEM
     rspec-mocks (3.1.0)
       rspec-support (~> 3.1.0)
     rspec-support (3.1.0)
+    thread_safe (0.3.4)
+    tzinfo (1.2.2)
+      thread_safe (~> 0.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  api-auth
+  mingle_events
   rake
   rspec

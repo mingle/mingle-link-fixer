@@ -1,5 +1,32 @@
 #!/usr/bin/env ruby
 
+require 'optparse'
+require 'mingle_events/mingle_hmac_auth_access'
+
 base = File.expand_path(__dir__)
 
-require File.join(base, 'mingle', 'link_fixer')
+params = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: #{$0} [options]"
+
+  opts.on("-k", "--key", "auth key, can be generated on your profile page under the tab 'HMAC Auth Key'") do |t|
+   params[:key] = t
+  end
+
+  opts.on("-l", "--login", "user login") do |t|
+   params[:login] = t
+  end
+
+  opts.on("-m", "--mingle", "mingle url, e.g. http://mingle.your.org") do |t|
+   params[:mingle] = t
+  end
+
+  opts.on_tail("-h", "--help", "Show this message") do
+    puts opts
+    exit
+  end
+
+end.parse(ARGV)
+
+
+auth = MingleEvents::MingleHmacAuthAccess.new(params[:mingle], params[:login], params[:key])
