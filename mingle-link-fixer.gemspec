@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Bill DePhillips"]
   s.email       = ["bill.dephillips@gmail.com"]
-  s.licenses    = ['MIT']
+  s.licenses    = ['Apache']
   s.homepage    = "https://github.com/thoughtworksstudios/mingle-link-fixer"
   s.summary     = "fixes mingle attachment links for imported data prior to 14.2.1"
   s.description = "fixes mingle attachment links for imported data prior to 14.2.1"

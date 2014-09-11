@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+base = File.expand_path(__dir__)
+
+require File.join(base, 'mingle', 'link_fixer')
