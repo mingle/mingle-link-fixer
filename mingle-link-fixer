@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'optparse'
-require 'mingle_events/mingle_hmac_auth_access'
+require 'mingle_events'
 
 base = File.expand_path(__dir__)
 
@@ -9,15 +9,19 @@ params = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: #{$0} [options]"
 
-  opts.on("-k", "--key", "auth key, can be generated on your profile page under the tab 'HMAC Auth Key'") do |t|
-   params[:key] = t
+  opts.on("-k", "--key [KEY]", "auth key, can be generated on your profile page under the tab 'HMAC Auth Key'") do |key|
+   params[:key] = key
   end
 
-  opts.on("-l", "--login", "user login") do |t|
-   params[:login] = t
+  opts.on("-l", "--login [LOGIN]", "user login") do |login|
+   params[:login] = login
   end
 
-  opts.on("-m", "--mingle", "mingle url, e.g. http://mingle.your.org") do |t|
+  opts.on("-u", "--url [URL]", "url, e.g. http://mingle.your.org/projects/my_project") do |url|
+   params[:host], params[:project_identifier] = url.split("/projects/")
+  end
+
+  opts.on("-t", "--test", "TEST MODE: do not do any updates, just print stuff out") do |t|
    params[:mingle] = t
   end
 
@@ -25,8 +29,15 @@ OptionParser.new do |opts|
     puts opts
     exit
   end
-
 end.parse(ARGV)
 
+puts "[DEBUG] params => #{params.inspect}"
 
-auth = MingleEvents::MingleHmacAuthAccess.new(params[:mingle], params[:login], params[:key])
+
+access = MingleEvents::MingleHmacAuthAccess.new(params[:host], params[:login], params[:key])
+
+event_fetcher = MingleEvents::ProjectEventFetcher.new(params[:project_identifier], access)
+
+event_fetcher.all_fetched_entries.each do |e|
+  puts "[DEBUG] e => #{e.inspect}"
+end

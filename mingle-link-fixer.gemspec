@@ -16,6 +16,6 @@ Gem::Specification.new do |s|
 
   s.executables << 'mingle-link-fixer'
 
-  s.files        = Dir.glob("{lib}/**/*") + %w(LICENSE README.md config.yml.example)
+  s.files        = Dir.glob("{lib}/**/*") + %w(LICENSE README.md)
   s.require_path = 'lib'
 end
