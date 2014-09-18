@@ -6,9 +6,7 @@ module Mingle
 
     attr_reader :attachment_links
 
-    def initialize(xml)
-      document = Nokogiri::XML.parse(xml)
-      description = document.xpath('./card/description').text
+    def initialize(description)
       @attachment_links = find_links(description)
     end
 
