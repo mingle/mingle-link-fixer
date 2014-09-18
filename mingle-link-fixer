@@ -9,15 +9,15 @@ params = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: #{$0} [options]"
 
-  opts.on("-k", "--key [KEY]", "auth key, can be generated on your profile page under the tab 'HMAC Auth Key'") do |key|
+  opts.on("-k", "--key KEY", "auth key, can be generated on your profile page under the tab 'HMAC Auth Key'") do |key|
    params[:key] = key
   end
 
-  opts.on("-l", "--login [LOGIN]", "user login") do |login|
+  opts.on("-l", "--login LOGIN", "user login") do |login|
    params[:login] = login
   end
 
-  opts.on("-u", "--url [URL]", "url, e.g. http://mingle.your.org/projects/my_project") do |url|
+  opts.on("-u", "--url URL", "url, e.g. http://mingle.your.org/projects/my_project") do |url|
    params[:host], params[:project_identifier] = url.split("/projects/")
   end
 
@@ -31,13 +31,11 @@ OptionParser.new do |opts|
   end
 end.parse(ARGV)
 
-puts "[DEBUG] params => #{params.inspect}"
-
-
 access = MingleEvents::MingleHmacAuthAccess.new(params[:host], params[:login], params[:key])
 
 event_fetcher = MingleEvents::ProjectEventFetcher.new(params[:project_identifier], access)
 
 event_fetcher.all_fetched_entries.each do |e|
-  puts "[DEBUG] e => #{e.inspect}"
+  puts e
+  binding.pry
 end

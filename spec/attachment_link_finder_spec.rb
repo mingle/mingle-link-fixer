@@ -5,14 +5,14 @@ module Mingle
 
     describe "finds links in html" do
 
-        let(:card_description) { "<h1>Hello</h1>" }
+        let(:card_description) { File.read(File.join(__dir__, 'data', 'card.xml')) }
 
         before(:each) do
           @finder = AttachmentLinkFinder.new(card_description)
         end
 
         it "finds those links" do
-          expect(@finder.attachment_links.size).to eq 0
+          expect(@finder.attachment_links.size).to eq 2
         end
 
     end
