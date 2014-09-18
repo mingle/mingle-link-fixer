@@ -1,11 +1,11 @@
-require_relative '../lib/mingle/attachment_link_finder'
+require_relative '../../lib/mingle/attachment_link_finder'
 module Mingle
 
   describe AttachmentLinkFinder do
 
     describe "finds links in html" do
 
-        let(:card_description) { File.read(File.join(__dir__, 'data', 'card.xml')) }
+        let(:card_description) { File.read(File.join(__dir__, '..', 'data', 'card.xml')) }
 
         before(:each) do
           @finder = AttachmentLinkFinder.new(card_description)
