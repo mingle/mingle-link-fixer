@@ -1,5 +1,5 @@
 module Mingle
-  class AbsoluteAttachmentLink
+  class AttachmentLink
 
     def initialize(element)
       @element = element

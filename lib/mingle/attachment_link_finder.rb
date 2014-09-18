@@ -1,5 +1,5 @@
 require 'nokogiri'
-require_relative 'absolute_attachment_link'
+require_relative 'attachment_link'
 
 module Mingle
   class AttachmentLinkFinder
@@ -16,8 +16,8 @@ module Mingle
       html = Nokogiri::HTML.parse(html)
       html.search('a').inject([]) do |memo, anchor|
         href = anchor['href']
-        if href =~ /^http/
-          memo << AbsoluteAttachmentLink.new(anchor)
+        if href =~ /projects.*attachments/
+          memo << AttachmentLink.new(anchor)
         end
         memo
       end
