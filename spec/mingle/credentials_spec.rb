@@ -4,8 +4,12 @@ module Mingle
 
   describe Credentials do
 
-    it "can be instantiated from the mingle csv file" do
+    let(:csv_filename) { File.join(__dir__, '..', 'data', 'credentials.csv') }
 
+    it "can be instantiated from the mingle csv file" do
+      credentials = Credentials.from_csv(csv_filename)
+      expect(credentials.access_key_id).to eq 'abcd'
+      expect(credentials.secret_access_key).to eq 'shh!'
     end
 
     it "can be instantiated with strings" do
