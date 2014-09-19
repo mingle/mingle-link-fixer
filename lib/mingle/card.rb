@@ -7,5 +7,6 @@ module Mingle
       document = Nokogiri::XML.parse(xml)
       @description = document.xpath('./card/description').text
     end
+
   end
 end
