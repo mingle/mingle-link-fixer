@@ -7,7 +7,7 @@ module Mingle
     let(:attachments) { HistoricalAttachments.new(File.join(__dir__, '..', 'data', 'extracted_export')) }
 
     it "knows how many there are" do
-      expect(attachments.size).to eq 3
+      expect(attachments.size).to eq 6
     end
 
     it "can find by id" do

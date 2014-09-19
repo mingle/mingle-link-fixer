@@ -6,7 +6,10 @@ module Mingle
 
     def initialize(path)
       @path = path
-      @attachments = YAML.load_file(File.join(path, 'attachments_0.yml'))
+      @attachments = []
+      Dir[File.join(@path, 'attachments_*.yml')].each do |file|
+        @attachments += YAML.load_file(file)
+      end
     end
 
     def size

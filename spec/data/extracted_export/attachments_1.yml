@@ -1,0 +1,13 @@
+---
+- path: attachments/00003b4e88ef83477567306793447dee
+  project_id: 2
+  id: 7000
+  file: papillon.jpg
+- path: attachments/0835bd0f2c66c8fb7610c9733575d222
+  project_id: 2
+  id: 7001
+  file: whiteboard.jpg
+- path: attachments/d01c10217876491279547e38002bc000
+  project_id: 2
+  id: 7002
+  file: security.pdf
