@@ -6,11 +6,15 @@ module Mingle
     end
 
     def rewrite(card, historical_attachments)
-      if @element['href'] =~ /projects.*\/attachments\/(\d+)/
-        old_attachment = historical_attachments.find_by_id($1)
-        new_attachment = card.attachments.find { |attachment| attachment.filename == old_attachment.filename }
-        "[[#{@element.text}|##{card.number}/#{new_attachment.filename}]]"
+      href = @element['href']
+      old_attachment_id = if href =~ /projects.*\/attachments\/(\d+)/
+        $1
+      elsif href =~ /attachments\/[0-9a-f]+\/(\d+)/
+        $1
       end
+      old_attachment = historical_attachments.find_by_id(old_attachment_id)
+      new_attachment = card.attachments.find { |attachment| attachment.filename == old_attachment.filename }
+      "[[#{@element.text}|##{card.number}/#{new_attachment.filename}]]" if new_attachment
     end
 
 
