@@ -6,8 +6,8 @@ module Mingle
     let(:card_xml) { File.read(File.join(__dir__, '..', 'data', 'card.xml')) }
 
     it "knows its description" do
-        card = Card.new(card_xml)
-        expect(card.description).to start_with '<p>'
+      card = Card.new(card_xml)
+      expect(card.description).to start_with '<p>'
     end
 
   end

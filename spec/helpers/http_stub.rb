@@ -1,6 +1,8 @@
 class HttpStub
 
-  def authenticate_with(credentials); end
+  def initialize(credentials=nil)
+    @credentials = credentials
+  end
 
   def respond_to(path, options)
     canned_responses[path] = options.delete(:with)
@@ -16,6 +18,5 @@ class HttpStub
   def canned_responses
     @canned_responses ||= {}
   end
-
 
 end

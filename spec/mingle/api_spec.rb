@@ -7,9 +7,9 @@ module Mingle
 
     let(:credentials) { Credentials.new(access_key_id: 'osito', secret_access_key: 'qAeODM3Px46uzuuZBiG8vhh9oioShRzYwO9oSSLxAEU')}
 
-    let(:http_client) { HttpStub.new }
+    let(:http_client) { HttpStub.new(credentials) }
 
-    let(:api) { API.new(credentials, http_client) }
+    let(:api) { API.new(http_client) }
 
     it "can execute mql" do
 

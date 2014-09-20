@@ -1,41 +1,7 @@
 #!/usr/bin/env ruby
 
-require 'optparse'
-require 'mingle_events'
+require_relative 'lib/mingle_link_fixer'
 
-base = File.expand_path(__dir__)
-
-params = {}
-OptionParser.new do |opts|
-  opts.banner = "Usage: #{$0} [options]"
-
-  opts.on("-k", "--key KEY", "auth key, can be generated on your profile page under the tab 'HMAC Auth Key'") do |key|
-   params[:key] = key
-  end
-
-  opts.on("-l", "--login LOGIN", "user login") do |login|
-   params[:login] = login
-  end
-
-  opts.on("-u", "--url URL", "url, e.g. http://mingle.your.org/projects/my_project") do |url|
-   params[:host], params[:project_identifier] = url.split("/projects/")
-  end
-
-  opts.on("-t", "--test", "TEST MODE: do not do any updates, just print stuff out") do |t|
-   params[:mingle] = t
-  end
-
-  opts.on_tail("-h", "--help", "Show this message") do
-    puts opts
-    exit
-  end
-end.parse(ARGV)
-
-access = MingleEvents::MingleHmacAuthAccess.new(params[:host], params[:login], params[:key])
-
-event_fetcher = MingleEvents::ProjectEventFetcher.new(params[:project_identifier], access)
-
-event_fetcher.all_fetched_entries.each do |e|
-  puts e
-  binding.pry
-end
+fixer = Mingle::LinkFixer.new(credential_file: '/Users/wdephill/Downloads/credentials.csv',
+                              project_url: 'http://localhost:8080/projects/test')
+fixer.fix(dry_run: true)
