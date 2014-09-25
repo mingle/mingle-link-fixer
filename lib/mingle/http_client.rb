@@ -12,7 +12,7 @@ module Mingle
       @credentials = credentials
     end
 
-    def get(path, params)
+    def get(path, params={})
       url = File.join(base_url, path + to_url(params))
       logger.debug "[GET] #{url}"
       process(Net::HTTP::Get, url)

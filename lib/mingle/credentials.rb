@@ -14,5 +14,9 @@ module Mingle
       @secret_access_key = values.delete(:secret_access_key) || raise("missing required value: secret_access_key")
     end
 
+    def inspect
+      super.tap { |inspection| inspection.gsub!(secret_access_key, '*****')}
+    end
+
   end
 end

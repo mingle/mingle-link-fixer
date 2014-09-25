@@ -21,7 +21,7 @@ module Mingle
 
     def fix(options={dry_run: false})
       Card.all.each do |card|
-        logger.debug "card => #{card.inspect}"
+        logger.debug "card ##{card.number} - #{card.name}"
       end
     end
 
