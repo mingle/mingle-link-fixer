@@ -24,15 +24,26 @@ module Mingle
 
     def fix(options={dry_run: false})
       Card.all.each do |card|
-        if card.attachments.empty?
-          logger.info "Skipping Card ##{card.number} because it has no attachments."
-          next
-        end
-        logger.debug "Fixing Card ##{card.number} - #{card.name}"
-        fixer = AttachmentLinkFinder.new(card.description)
-        fixer.attachment_links.each do |attachment_link|
-          mingle_wiki_syntax = attachment_link.rewrite(card, @historical_attachments)
-          logger.debug "\treplacing link with #{mingle_wiki_syntax}"
+        begin
+          if card.attachments.empty?
+            logger.debug "Skipping Card ##{card.number} because it has no attachments."
+            next
+          end
+          fixer = AttachmentLinkFinder.new(card.description)
+
+          if fixer.attachment_links.empty?
+            logger.info "no attachment links present"
+            next
+          end
+
+          logger.info "fixing #{fixer.attachment_links.size} links"
+          fixer.attachment_links.each do |attachment_link|
+            mingle_wiki_syntax = attachment_link.rewrite(card, @historical_attachments)
+            logger.debug "replacing link with #{mingle_wiki_syntax}"
+          end
+        rescue => e
+          logger.error "Unable to fix Card ##{card.number} because of error: #{e.message}"
+          logger.debug e.backtrace.join("\n")
         end
       end
     end
