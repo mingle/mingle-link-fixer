@@ -26,7 +26,7 @@ module Mingle
       Card.all.each do |card|
         begin
           if card.attachments.empty?
-            logger.debug "Skipping Card ##{card.number} because it has no attachments."
+            logger.debug "skipping Card ##{card.number} because it has no attachments."
             next
           end
           fixer = AttachmentLinkFinder.new(card.description)
@@ -40,6 +40,13 @@ module Mingle
           fixer.attachment_links.each do |attachment_link|
             mingle_wiki_syntax = attachment_link.rewrite(card, @historical_attachments)
             logger.debug "replacing link with #{mingle_wiki_syntax}"
+
+            
+            unless options[:dry_run]
+
+            else
+              logger.debug "[dry-run] so not doing any actual change"
+            end
           end
         rescue => e
           logger.error "Unable to fix Card ##{card.number} because of error: #{e.message}"

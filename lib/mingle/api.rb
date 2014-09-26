@@ -19,6 +19,10 @@ module Mingle
       @http_client.get("/cards/#{card_number}/attachments.xml").body
     end
 
+    def save_card(card)
+      @http_client.post("/cards/#{card.number}.xml", description: card.description)
+    end
+
     def execute_mql(mql)
       response = @http_client.get('/cards/execute_mql.xml', mql: mql)
       logger.debug(response.body)

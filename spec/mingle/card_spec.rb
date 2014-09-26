@@ -1,4 +1,5 @@
 require_relative '../../lib/mingle/card'
+require_relative '../helpers/http_stub'
 
 module Mingle
   describe Card do
@@ -16,6 +17,27 @@ module Mingle
 
     it "knows its name" do
       expect(card.name).to eq "first"
+    end
+
+    context "with stubbed api" do
+      let(:http_client) { HttpStub.new }
+      let(:api) { API.new(http_client) }
+
+      before(:each) do
+        Card.api = api
+        http_client.respond_to('/cards/1.xml', with: card_xml)
+      end
+
+      describe "#save!" do
+
+        it "persists to mingle" do
+          card.description = "I have been modified"
+          card.save!
+          reloaded_card = Card.find_by_number(card.number)
+          expect(reloaded_card.description).to eq card.description
+        end
+      end
+
     end
 
   end
