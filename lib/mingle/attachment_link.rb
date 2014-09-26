@@ -13,6 +13,7 @@ module Mingle
         $1
       end
       old_attachment = historical_attachments.find_by_id(old_attachment_id)
+      raise "Could not find historical attachment based on #{old_attachment_id}"
       new_attachment = card.attachments.find { |attachment| attachment.filename == old_attachment.filename }
       "[[#{@element.text}|##{card.number}/#{new_attachment.filename}]]" if new_attachment
     end
