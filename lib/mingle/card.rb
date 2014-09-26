@@ -1,3 +1,5 @@
+require 'nokogiri'
+
 module Mingle
   class Card
 
@@ -27,6 +29,10 @@ module Mingle
       @description = document.xpath('./card/description').text
       @number = document.xpath('./card/number').text.to_i
       @name = document.xpath('./card/name').text
+    end
+
+    def attachments
+      @attachments ||= Attachment.find_all_by_card_number(number)
     end
 
   end
