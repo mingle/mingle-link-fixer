@@ -14,14 +14,7 @@ class HttpStub
     number = if path =~ /cards\/(\d+)\.xml/
       $1.to_i
     end
-    respond_to(path, with:<<-XML)
-<?xml version="1.0" encoding="UTF-8"?>
-<card>
-  <name>name of #{number}</name>
-  <description>#{params[:description]}</description>
-  <number type="integer">#{number}</number>
-</card>
-XML
+    respond_to path, with: params[:body]
   end
 
   def get(relative_path, params={})

@@ -44,5 +44,13 @@ module Mingle
       @@api.save_card(self)
     end
 
+    def to_xml
+      Nokogiri::XML::Builder.new { |xml|
+        xml.card {
+          xml.description(@description)
+        }
+      }.to_xml
+    end
+
   end
 end

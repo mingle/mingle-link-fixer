@@ -19,6 +19,10 @@ module Mingle
       expect(card.name).to eq "first"
     end
 
+    it "can serialize itself to xml" do
+      expect(card.to_xml.strip).to include("<?xml version=\"1.0\"?>\n<card>\n  <description>&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n\n&lt;p&gt;Do you see any Teletubbies in here?")
+    end
+
     context "with stubbed api" do
       let(:http_client) { HttpStub.new }
       let(:api) { API.new(http_client) }

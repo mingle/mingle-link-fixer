@@ -20,7 +20,7 @@ module Mingle
     end
 
     def save_card(card)
-      @http_client.post("/cards/#{card.number}.xml", description: card.description)
+      @http_client.post("/cards/#{card.number}.xml", body: card.to_xml)
     end
 
     def execute_mql(mql)

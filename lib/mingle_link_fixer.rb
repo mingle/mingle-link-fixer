@@ -8,6 +8,8 @@ require_relative 'mingle/card'
 require_relative 'mingle/historical_attachments'
 require_relative 'mingle/attachment_link_finder'
 
+require 'pry'
+
 module Mingle
   class LinkFixer
     include Logging
@@ -23,6 +25,7 @@ module Mingle
     end
 
     def fix(options={dry_run: false})
+      binding.pry
       Card.all.each do |card|
         begin
           if card.attachments.empty?
@@ -41,7 +44,7 @@ module Mingle
             mingle_wiki_syntax = attachment_link.rewrite(card, @historical_attachments)
             logger.debug "replacing link with #{mingle_wiki_syntax}"
 
-            
+
             unless options[:dry_run]
 
             else

@@ -14,8 +14,14 @@ module Mingle
 
     def get(path, params={})
       url = File.join(base_url, path + to_url(params))
-      logger.debug "[GET] #{url}"
+      logger.debug "HTTP GET #{url}"
       process(Net::HTTP::Get, url)
+    end
+
+    def post(path, params)
+      url = url = File.join(base_url, path)
+      logger.debug "HTTP POST #{url}"
+      process(Net::HTTP::Post, url, {}, params[:body])
     end
 
     private
