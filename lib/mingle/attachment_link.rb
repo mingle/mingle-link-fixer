@@ -24,6 +24,7 @@ module Mingle
     def rewrite!(card, historical_attachments)
       new_content = rewrite(card, historical_attachments)
       @element.replace(Nokogiri::XML::Text.new(new_content, @element.document))
+      nil
     end
 
 
