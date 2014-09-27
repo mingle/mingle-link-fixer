@@ -29,25 +29,28 @@ module Mingle
             logger.debug "skipping Card ##{card.number} because it has no attachments."
             next
           end
-          fixer = AttachmentLinkFinder.new(card.description)
+          finder = AttachmentLinkFinder.new(card.description)
 
-          if fixer.attachment_links.empty?
+          if finder.attachment_links.empty?
             logger.info "no attachment links present"
             next
           end
 
           logger.info "fixing #{fixer.attachment_links.size} links"
-          fixer.attachment_links.each do |attachment_link|
-            mingle_wiki_syntax = attachment_link.rewrite(card, @historical_attachments)
-            logger.debug "replacing link with #{mingle_wiki_syntax}"
 
-
-            unless options[:dry_run]
-
-            else
-              logger.debug "[dry-run] so not doing any actual change"
-            end
+          finder.attachment_links.each do |attachment_link|
+            attachment_link.rewrite!(card, @historical_attachments)
           end
+
+          html_document = finder.card_description_document
+          card.description = html_document.to_html
+
+          if options[:dry_run]
+              logger.info("(skipped saving card because dry_run is enabled)")
+          else
+              card.save!
+          end
+
         rescue => e
           logger.error "Unable to fix Card ##{card.number} because of error: #{e.message}"
           logger.debug e.backtrace.join("\n")

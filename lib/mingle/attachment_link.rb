@@ -3,6 +3,7 @@ require_relative 'attachment'
 
 module Mingle
   class AttachmentLink
+    include Logging
 
     def initialize(element)
       @element = element
@@ -23,6 +24,7 @@ module Mingle
 
     def rewrite!(card, historical_attachments)
       new_content = rewrite(card, historical_attachments)
+      logger.debug "replacing #{@element.to_html} with #{new_content}"
       @element.replace(Nokogiri::XML::Text.new(new_content, @element.document))
       nil
     end
