@@ -36,6 +36,10 @@ module Mingle
       @name = document.xpath('./card/name').text
     end
 
+    def description=(desc)
+      @description = remove_enclosing_html_doc_and_body(desc)
+    end
+
     def attachments
       @attachments ||= Attachment.find_all_by_card_number(number)
     end
@@ -50,6 +54,18 @@ module Mingle
           xml.description(@description)
         }
       }.to_xml
+    end
+
+    private
+
+    DOCTYPE_REGEX = /^<!DOCTYPE html PUBLIC "-\/\/W3C\/\/DTD HTML 4.0 Transitional\/\/EN" "http:\/\/www.w3.org\/TR\/REC-html40\/loose.dtd\">/
+
+    def remove_enclosing_html_doc_and_body(html)
+      html.gsub(DOCTYPE_REGEX, '').strip
+        .gsub(/<html>/, '').strip
+        .gsub(/<body>/, '').strip
+        .gsub(/<\/html>$/, '').strip
+        .gsub(/<\/body>$/, '').strip
     end
 
   end

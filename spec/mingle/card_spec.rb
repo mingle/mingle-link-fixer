@@ -7,9 +7,24 @@ module Mingle
     let(:card_xml) { File.read(File.join(__dir__, '..', 'data', 'card.xml')) }
     let(:card) { Card.new(card_xml) }
 
-    it "knows its description" do
-      expect(card.description).to start_with '<p>'
+    context "description attribute" do
+      it "can be read" do
+        expect(card.description).to start_with '<p>'
+      end
+
+      it "extracts the html fragment when setting with a full HTML document" do
+        card.description = %{<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+          <html>
+            <body>
+              <p>[[Link text|#123/pomeranian.jpg]]</p>
+            </body>
+          </html>
+        }
+        expect(without_whitespace(card.description)).to eq %{<p>[[Link text|#123/pomeranian.jpg]]</p>}
+      end
     end
+
+
 
     it "knows its number" do
       expect(card.number).to eq 1
@@ -42,6 +57,12 @@ module Mingle
         end
       end
 
+    end
+
+    private
+
+    def without_whitespace(string)
+      string.gsub("\t", "").gsub("\n", "").strip
     end
 
   end
