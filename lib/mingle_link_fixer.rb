@@ -1,30 +1,27 @@
 require 'logger'
 
 require_relative 'mingle/logging'
-require_relative 'mingle/credentials'
 require_relative 'mingle/http_client'
 require_relative 'mingle/api'
 require_relative 'mingle/card'
 require_relative 'mingle/historical_attachments'
 require_relative 'mingle/attachment_link_finder'
 
-require 'pry'
-
 module Mingle
   class LinkFixer
     include Logging
 
     def initialize(options)
-      credentials = Credentials.from_csv(options[:credential_file])
-      @http_client = HttpClient.new(credentials)
-      prefix, suffix = options[:project_url].split('/projects/')
-      @http_client.base_url = "#{prefix}/api/v2/projects/#{suffix}"
+      @http_client = HttpClient.new(options[:username], options[:password])
+      prefix, suffix =
+      @http_client.base_url = options[:project_url].gsub('/projects/', '/api/v2/projects/')
       @api = API.new(@http_client)
       @historical_attachments = HistoricalAttachments.new(options[:historical_attachments_folder])
       Card.api = Attachment.api = @api
     end
 
     def fix(options={dry_run: false})
+      require('pry')
       binding.pry
       Card.all.each do |card|
         begin

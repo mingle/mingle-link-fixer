@@ -1,3 +1,6 @@
+require_relative 'historical_attachments'
+require_relative 'attachment'
+
 module Mingle
   class AttachmentLink
 
@@ -16,6 +19,11 @@ module Mingle
       raise "Could not find historical attachment based on #{old_attachment_id}" unless old_attachment
       new_attachment = card.attachments.find { |attachment| attachment.filename == old_attachment.filename }
       "[[#{@element.text}|##{card.number}/#{new_attachment.filename}]]" if new_attachment
+    end
+
+    def rewrite!(card, historical_attachments)
+      new_content = rewrite(card, historical_attachments)
+      @element.replace(Nokogiri::XML::Text.new(new_content, @element.document))
     end
 
 

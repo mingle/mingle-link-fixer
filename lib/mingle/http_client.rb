@@ -1,6 +1,5 @@
 require 'net/http'
 require 'cgi'
-require 'api_auth'
 
 module Mingle
   class HttpClient
@@ -8,8 +7,9 @@ module Mingle
 
     attr_accessor :base_url
 
-    def initialize(credentials)
-      @credentials = credentials
+    def initialize(username, password)
+      @username = username
+      @password = password
     end
 
     def get(path, params={})
@@ -18,10 +18,10 @@ module Mingle
       process(Net::HTTP::Get, url)
     end
 
-    def post(path, params)
+    def put(path, params={})
       url = url = File.join(base_url, path)
-      logger.debug "HTTP POST #{url}"
-      process(Net::HTTP::Post, url, {}, params[:body])
+      body = params.delete :body
+      process(Net::HTTP::Put, url, params, body)
     end
 
     private
@@ -41,12 +41,11 @@ module Mingle
       http.use_ssl = true if uri.scheme == 'https'
 
       request = request_class.new(uri.request_uri)
-      request.body = body if body
+      request.basic_auth @username, @password
+      request.body = body if body.tap { logger.debug("HTTP body: #{body}") }
       headers.each do |key, value|
         request[key] = value
       end
-
-      ApiAuth.sign!(request, @credentials.access_key_id, @credentials.secret_access_key)
 
       response = http.request(request)
     end

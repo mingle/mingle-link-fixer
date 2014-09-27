@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'cgi'
 
 require_relative 'logging'
 
@@ -20,7 +21,7 @@ module Mingle
     end
 
     def save_card(card)
-      @http_client.post("/cards/#{card.number}.xml", body: card.to_xml)
+      @http_client.put("/cards/#{card.number}.xml", body: "card[description]=#{CGI.escape(card.description)}", 'Content-Type' => 'application/x-www-form-urlencoded')
     end
 
     def execute_mql(mql)
