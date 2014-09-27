@@ -10,10 +10,7 @@ class HttpStub
     canned_responses[path] = options.delete(:with)
   end
 
-  def post(path, params)
-    number = if path =~ /cards\/(\d+)\.xml/
-      $1.to_i
-    end
+  def put(path, params)
     respond_to path, with: params[:body]
   end
 
