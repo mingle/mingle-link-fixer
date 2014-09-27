@@ -21,7 +21,7 @@ module Mingle
     end
 
     def save_card(card)
-      @http_client.put("/cards/#{card.number}.xml", body: "card[description]=#{CGI.escape(card.description)}", 'Content-Type' => 'application/x-www-form-urlencoded')
+      @http_client.put("/cards/#{card.number}.xml", body: card.to_xml, 'Content-Type' => 'text/xml')
     end
 
     def execute_mql(mql)
