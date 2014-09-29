@@ -21,8 +21,6 @@ module Mingle
     end
 
     def fix(options={dry_run: false})
-      require('pry')
-      binding.pry
       Card.all.each do |card|
         begin
           if card.attachments.empty?
