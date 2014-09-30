@@ -1,8 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'api-auth'
-gem 'nokogiri'
-gem 'httparty'
+group :dist do
+  gem 'nokogiri'
+  gem 'httparty'
+  gem 'highline'
+end
 
 group :test do
   gem 'rake'

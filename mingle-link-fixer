@@ -1,7 +1,34 @@
 #!/usr/bin/env ruby
-
+require 'highline/import'
+require 'uri'
 require_relative 'lib/mingle_link_fixer'
 
-fixer = Mingle::LinkFixer.new(credential_file: '/Users/wdephill/Downloads/credentials.csv',
-                              project_url: 'http://localhost:8080/projects/test')
-fixer.fix(dry_run: true)
+def die_with_usage
+  puts(<<-USAGE.trim)
+  usage: #{$0} PROJECT_URL OLD_PROJECT_EXPORT
+      example: #{0} http://mingle.your.org/projects/plan_a /path/to/extracted/proj/export
+USAGE
+  exit -1
+end
+
+die_with_usage if ARGV[0].nil? || ARGV[0].empty?
+project_uri = URI.parse(ARGV[0])
+
+old_project_export_folder = if ARGV[1].nil? || ARGV[1].empty?
+  die_with_usage
+elsif Dir[File.join(ARGV[1], "*.yml")].count > 0
+  ARGV[1]
+else
+  puts "Could find attachments yml files in #{ARGV[1]}"
+  exit -1
+end
+
+username = ENV['MINGLE_USERNAME'] || ask("enter username for #{project_uri.hostname}")
+password = ENV['MINGLE_PASSWORD'] || ask("enter password for #{username}: ") { |prompt| prompt.echo = false }
+
+fixer = Mingle::LinkFixer.new(project_url: project_uri.to_s,
+                              historical_attachments_folder: old_project_export_folder,
+                              username: username,
+                              password: password)
+
+fixer.fix(dry_run: ENV['DRY_RUN'] == 'true', starting_card: ENV['STARTING_CARD'], limit: ENV['LIMIT'])

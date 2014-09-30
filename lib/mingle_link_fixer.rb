@@ -13,15 +13,16 @@ module Mingle
 
     def initialize(options)
       @http_client = HttpClient.new(options[:username], options[:password])
-      prefix, suffix =
       @http_client.base_url = options[:project_url].gsub('/projects/', '/api/v2/projects/')
       @api = API.new(@http_client)
       @historical_attachments = HistoricalAttachments.new(options[:historical_attachments_folder])
       Card.api = Attachment.api = @api
     end
 
-    def fix(options={dry_run: false})
-      Card.all.each do |card|
+    def fix(options={})
+      options = {dry_run: false, starting_card: '1'}.merge(options)
+      logger.info "running #{self.class} (dry_run: #{options[:dry_run]}, verbose_logging: #{VERBOSE})"
+      Card.all(starting_with: options[:starting_card], limit: options[:limit]).each do |card|
         begin
           if card.attachments.empty?
             logger.debug "skipping Card ##{card.number} because it has no attachments."
@@ -34,7 +35,7 @@ module Mingle
             next
           end
 
-          logger.info "fixing #{fixer.attachment_links.size} links"
+          logger.info "fixing #{finder.attachment_links.size} links"
 
           finder.attachment_links.each do |attachment_link|
             attachment_link.rewrite!(card, @historical_attachments)
