@@ -18,7 +18,7 @@ module Mingle
         xml = @@api.get_attachments_on(number)
         document = Nokogiri::XML.parse(xml)
         document.xpath('./attachments/attachment').each do |element|
-          filename = element.xpath('./filename').text
+          filename = element.xpath('./file_name').text
           attachments << Attachment.new(filename)
         end
       end
