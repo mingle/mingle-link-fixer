@@ -1,12 +1,16 @@
 #!/usr/bin/env ruby
 require 'highline/import'
 require 'uri'
-require_relative 'lib/mingle_link_fixer'
+require_relative '../lib/mingle_link_fixer'
+
+def my_simple_name
+  $0.split('/')[-1]
+end
 
 def die_with_usage
-  puts(<<-USAGE.trim)
-  usage: #{$0} PROJECT_URL OLD_PROJECT_EXPORT
-      example: #{0} http://mingle.your.org/projects/plan_a /path/to/extracted/proj/export
+  puts(<<-USAGE.strip)
+  usage: #{my_simple_name} PROJECT_URL OLD_PROJECT_EXPORT
+      example: #{my_simple_name} http://mingle.your.org/projects/plan_a /path/to/extracted/proj/export
 USAGE
   exit -1
 end

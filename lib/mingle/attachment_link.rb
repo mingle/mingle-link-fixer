@@ -33,7 +33,7 @@ module Mingle
       @element.replace(Nokogiri::XML::Text.new(new_content, @element.document))
       nil
     rescue => e
-      logger.warn("Could not replace #{@element} because: #{e.message}")
+      raise "Could not replace #{@element} because: #{e.message}"
     end
 
 

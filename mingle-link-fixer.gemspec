@@ -11,8 +11,8 @@ Gem::Specification.new do |s|
   s.email       = ["bill.dephillips@gmail.com"]
   s.licenses    = ['Apache']
   s.homepage    = "https://github.com/thoughtworksstudios/mingle-link-fixer"
-  s.summary     = "fixes mingle attachment links for imported data prior to 14.2.1"
-  s.description = "fixes mingle attachment links for imported data prior to 14.2.1"
+  s.summary     = "fixes attachment links if you relocate a project"
+  s.description = "fixes inline attachment links when a project is relocated"
 
   s.executables << 'mingle-link-fixer'
 
