@@ -3,7 +3,8 @@ require 'logger'
 module Mingle
   module Logging
 
-    LOGGER = Logger.new(STDOUT).tap { |l| l.level = ENV['VERBOSE'] ? Logger::DEBUG : Logger::INFO }
+    VERBOSE = (ENV['VERBOSE'] == 'true')
+    LOGGER = Logger.new(STDOUT).tap { |l| l.level = VERBOSE ? Logger::DEBUG : Logger::INFO }
 
     def self.info(msg)
       LOGGER.info(msg)
@@ -11,6 +12,10 @@ module Mingle
 
     def self.debug(msg)
       LOGGER.debug(msg)
+    end
+
+    def self.error(msg)
+      LOGGER.error(msg)
     end
 
     def logger

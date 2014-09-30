@@ -42,12 +42,16 @@ module Mingle
 
       request = request_class.new(uri.request_uri)
       request.basic_auth @username, @password
-      request.body = body if body.tap { logger.debug("HTTP body: #{body}") }
+      request.body = body if body.tap { logger.debug("HTTP body: #{body}") if body }
       headers.each do |key, value|
         request[key] = value
       end
 
       response = http.request(request)
+
+      response.tap do
+        raise "Unexpected response of #{response.code} to #{url}" unless response.code.to_i >= 200 && response.code.to_i < 400
+      end
     end
 
   end
