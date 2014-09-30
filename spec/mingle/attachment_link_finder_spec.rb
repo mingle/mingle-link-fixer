@@ -18,7 +18,7 @@ module Mingle
         end
 
         it "knows the HTML document" do
-          expect(@finder.card_description_html.to_html).to eq description_html
+          expect(@finder.card_description_document.to_html).to eq description_html
         end
 
     end
