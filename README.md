@@ -21,3 +21,15 @@ You'll need Ruby 2.0+
   > mingle-link-fixer http://mingle.your.org/projects/iphone_app /path/containing/extracted/good/export
 
 You can set the environment variables VERBOSE and DRY_RUN to true if you want more information or want to see what will happen when it runs, respectively.
+
+
+Contributors / Bugs / &c.
+-------------------------
+
+Email mingle dot feedback at thoughtworks.com to get in touch with the development team.
+
+Or open a pull request at github.
+
+Snap CI build status:
+
+[![Build Status](https://snap-ci.com/ThoughtWorksStudios/mingle-link-fixer/branch/master/build_image)](https://snap-ci.com/ThoughtWorksStudios/mingle-link-fixer/branch/master)
