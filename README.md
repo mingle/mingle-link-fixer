@@ -26,9 +26,7 @@ You can set the environment variables VERBOSE and DRY_RUN to true if you want mo
 Contributors / Bugs / &c.
 -------------------------
 
-Email mingle dot feedback at thoughtworks.com to get in touch with the development team.
-
-Or open a github issue.
+Please open a GitHub issue and we'll get in touch.
 
 Snap CI build status:
 
