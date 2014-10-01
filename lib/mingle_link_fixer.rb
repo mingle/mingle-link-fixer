@@ -1,6 +1,7 @@
 require 'logger'
 
 require_relative 'mingle/logging'
+require_relative 'mingle/stats'
 require_relative 'mingle/http_client'
 require_relative 'mingle/api'
 require_relative 'mingle/card'
@@ -10,21 +11,6 @@ require_relative 'mingle/attachment_link_finder'
 module Mingle
   class LinkFixer
     include Logging
-
-    class Stats
-
-      attr_accessor :total_cards_checked, :cards_without_attachments, :cards_without_links,
-                    :cards_fixed, :problematic_cards
-
-      def initialize
-        @total_cards_checked = 0
-        @cards_without_attachments = 0
-        @cards_without_links = 0
-        @problematic_cards = {}
-        @fixed_cards = 0
-      end
-
-    end
 
     def initialize(options)
       @http_client = HttpClient.new(options[:username], options[:password])
@@ -77,8 +63,7 @@ module Mingle
         end
       end
 
-      logger.info "Completed in Xsec"
-      # stats
+      logger.info stats.to_pretty_string
     end
 
   end
