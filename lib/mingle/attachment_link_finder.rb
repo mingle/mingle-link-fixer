@@ -16,7 +16,7 @@ module Mingle
       @card_description_document = Nokogiri::HTML.parse(html)
       @card_description_document.search('a').inject([]) do |memo, anchor|
         href = anchor['href']
-        if href =~ /projects.*attachments/
+        if href =~ /attachments/
           memo << AttachmentLink.new(anchor)
         end
         memo

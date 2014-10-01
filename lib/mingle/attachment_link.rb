@@ -1,3 +1,5 @@
+require_relative 'logging'
+require_relative 'card'
 require_relative 'historical_attachments'
 require_relative 'attachment'
 
