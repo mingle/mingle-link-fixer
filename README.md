@@ -11,10 +11,21 @@ This script is designed to fix this problem.  If you have your export file with 
 
 What's that, you say?  That's wiki markup?  Well, yes, it is.  We chose to stick with the format our users were used to rather than invent a way to put that into HTML links.
 
-Usage
------
+Prerequisites
+-------------
 
 You'll need Ruby 2.0+
+
+You'll also need the .mingle export file you used to move (which has the valid mappings from attachment ID to attachment filename.)
+
+You need to extract this export in a known location (to pass in as the second param below). Unfortunately, extracting has two gotchas:
+
+  * A .mingle file is a zip file but it uses the poorly supported [zip64](https://en.wikipedia.org/wiki/Zip_(file_format)#ZIP64) extension to allow it to exceed 4GB.  The easiest way to extract it is to use p7zip.
+  * It is an "archive bomb" which means it extracts all its contents into your current directory, polluting it.  Make sure to create an empty new folder before extracting.
+
+
+Steps
+-----
 
   > gem install mingle-link-fixer
 
