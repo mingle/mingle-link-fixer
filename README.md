@@ -1,7 +1,7 @@
 Mingle Attachment Link Fixer
 ============================
 
-If you're like many Mingle users and you wanted to add link to an attachment, then you probably just right-clicked the attachment at the bottom of the card and pasted that into the link box.
+If you're like many [Mingle](http://getmingle.io) users and you wanted to add link to an attachment, then you probably just right-clicked the attachment at the bottom of the card and pasted that into the link box.
 
 Which is all fine and dandy, until you move Mingle servers, move from on-premise to Mingle SaaS, or recover your project from a data backup.  In this case, the attachment IDs will be different.  All the links will be broken!!
 
@@ -26,9 +26,7 @@ You can set the environment variables VERBOSE and DRY_RUN to true if you want mo
 Contributors / Bugs / &c.
 -------------------------
 
-Email mingle dot feedback at thoughtworks.com to get in touch with the development team.
-
-Or open a pull request at github.
+Please open a GitHub issue and we'll get in touch.
 
 Snap CI build status:
 
