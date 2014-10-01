@@ -58,8 +58,7 @@ module Mingle
 
         rescue => e
           logger.error "Unable to fix Card ##{card.number} because of error: #{e.message}"
-          stats.problematic_cards[card.number] = e.message
-          logger.debug e.backtrace.join("\n")
+          stats.problematic_cards[card.number] = e
         end
       end
 
