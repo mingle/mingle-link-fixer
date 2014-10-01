@@ -1,7 +1,7 @@
 Mingle Attachment Link Fixer
 ============================
 
-If you're like many Mingle users and you wanted to add link to an attachment, then you probably just right-clicked the attachment at the bottom of the card and pasted that into the link box.
+If you're like many [Mingle](http://getmingle.io) users and you wanted to add link to an attachment, then you probably just right-clicked the attachment at the bottom of the card and pasted that into the link box.
 
 Which is all fine and dandy, until you move Mingle servers, move from on-premise to Mingle SaaS, or recover your project from a data backup.  In this case, the attachment IDs will be different.  All the links will be broken!!
 
