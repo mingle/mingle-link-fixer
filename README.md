@@ -28,7 +28,7 @@ Contributors / Bugs / &c.
 
 Email mingle dot feedback at thoughtworks.com to get in touch with the development team.
 
-Or open a pull request at github.
+Or open a github issue.
 
 Snap CI build status:
 
