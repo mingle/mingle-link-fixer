@@ -12,14 +12,11 @@ module Mingle
     let(:card) { Card.new(card_xml) }
 
     context "#save_card" do
-
       it "submits #to_xml" do
         card.description = "xyz"
         api.save_card(card)
         expect(api.get_card(card.number)).to eq(card.to_xml)
       end
-
-
     end
 
     it "can execute mql" do

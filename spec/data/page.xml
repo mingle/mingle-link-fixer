@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page>
+  <id type="integer">95</id>
+  <identifier>Example_Page</identifier>
+  <name>Example Page</name>
+  <content>Cornhole authentic chambray, Williamsburg cred health goth ad consectetur accusamus. Artisan Williamsburg Shoreditch, try-hard retro pickled Pinterest selfies dolore gastropub nisi sriracha nihil quinoa. Synth nostrud health goth asymmetrical High Life drinking vinegar. Twee Austin you probably haven't heard of them, 8-bit Williamsburg Intelligentsia Portland Carles in aesthetic duis. Roof party McSweeney's viral, normcore fap readymade brunch aliquip scenester. Nostrud selvage fanny pack, readymade Truffaut crucifix keffiyeh brunch ethical occupy ullamco Portland salvia PBR ennui. Qui occupy mixtape, enim Pinterest retro veniam wayfarers trust fund chia artisan letterpress vero ad.
+
+  Deserunt pour-over listicle, kogi chillwave slow-carb Marfa et excepteur pariatur mustache literally tousled nihil. Vegan Portland meditation non sed tote bag chia photo booth. Anim blog Thundercats, nihil normcore four loko ugh food truck swag aesthetic id cillum Banksy meggings. Meh seitan typewriter nihil narwhal tempor, PBR&B Austin beard cupidatat Blue Bottle Pitchfork 8-bit. Meggings sriracha Brooklyn meh ullamco, ugh et Intelligentsia magna dreamcatcher Bushwick crucifix actually proident Pitchfork. Fingerstache Banksy lo-fi drinking vinegar mixtape McSweeney's. Bitters Etsy qui commodo health goth, food truck drinking vinegar Austin street art.
+
+  Lomo crucifix cardigan 3 wolf moon, butcher officia bicycle rights occaecat blog fingerstache eiusmod keffiyeh. Artisan duis hashtag, skateboard meditation stumptown pickled nihil twee lomo vero officia fixie. Narwhal roof party labore PBR, freegan fashion axe Odd Future veniam plaid brunch dolor pop-up. Shoreditch drinking vinegar odio, ut next level aliquip Blue Bottle Marfa wolf selvage selfies dolor. Kale chips PBR&B flannel, Intelligentsia mixtape consequat iPhone irure Pinterest locavore disrupt salvia normcore +1. Ennui irony food truck minim, scenester Intelligentsia 8-bit seitan bitters id chillwave pickled meggings. Pour-over ea fashion axe pariatur.
+
+  Wes Anderson adipisicing Godard, iPhone narwhal twee est. Locavore Marfa odio, VHS voluptate ex kale chips fanny pack aliqua selvage readymade cillum street art enim. Fugiat Williamsburg hella, ullamco High Life bespoke mumblecore farm-to-table Shoreditch butcher biodiesel. Velit meditation meggings retro, cliche ethical viral. Laboris consequat tilde, before they sold out stumptown Carles do aesthetic distillery VHS nisi. Put a bird on it mumblecore ut, keytar viral mustache leggings Pinterest ethical velit veniam. Sapiente mixtape enim, ut 90's asymmetrical bicycle rights reprehenderit eiusmod pork belly elit ethical.
+  </content>
+  <project url="http://localhost:8080/api/v2/projects/test.xml">
+  <name>TNA - Linked Data Strategy Implementation</name>
+  <identifier>tna___linked_data_strategy_im</identifier>
+  </project>
+  <created_at type="datetime">2014-12-12T15:04:31Z</created_at>
+  <updated_at type="datetime">2015-02-19T16:42:07Z</updated_at>
+  <created_by url="https://http://localhost:8080/api/v2/users/124.xml">
+  <name>Bob Author</name>
+  <login>bauthor</login>
+  </created_by>
+  <modified_by url="http://localhost:8080/api/v2/users/123.xml">
+  <name>Jill Author</name>
+  <login>jauthor</login>
+  </modified_by>
+  <version type="integer">2</version>
+  <rendered_description url="http://localhost:8080/api/v2/projects/test/render?content_provider%5Bid%5D=95&content_provider%5Btype%5D=page"></rendered_description>
+</page>

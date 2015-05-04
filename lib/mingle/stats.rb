@@ -2,7 +2,8 @@ module Mingle
   class Stats
 
     attr_accessor :total_cards_checked, :cards_without_attachments, :cards_without_links,
-                  :cards_fixed, :problematic_cards
+                  :cards_fixed, :problematic_cards, :total_pages_checked, :pages_without_attachments,
+                  :pages_without_links, :problematic_pages, :pages_fixed
 
     SPACER = "=" * 80
 
@@ -12,6 +13,11 @@ module Mingle
       @cards_without_links = 0
       @problematic_cards = {}
       @cards_fixed = 0
+      @total_pages_checked = 0
+      @pages_without_attachments = 0
+      @pages_without_links = 0
+      @problematic_pages = {}
+      @pages_fixed = 0
       @start = Time.now
     end
 
@@ -32,6 +38,17 @@ module Mingle
 
         Fixed Cards:                 #{cards_fixed}
         #{SPACER}
+        Total Pages Checked:         #{total_pages_checked}
+        Pages Without Attachments:   #{pages_without_attachments}
+        Pages Without Fixable Links: #{pages_without_links}
+
+        Problematic Pages:           #{problematic_pages.size}
+
+        #{'(specific errors can be seen if you set VERBOSE environment variable)' if problematic_pages.any?}
+        #{ problematic_pages_with_errors if Logging::VERBOSE }
+
+        Fixed Pages:                 #{pages_fixed}
+        #{SPACER}
       }
     end
 
@@ -45,6 +62,13 @@ module Mingle
       problematic_cards.inject([]) do |lines, pair|
         card_number, error = pair
         lines << "\nCard ##{card_number}: #{error.message}\n"
+      end.join("\n")
+    end
+
+    def problematic_pages_with_errors
+      problematic_pages.inject([]) do |lines, pair|
+        page_identifier, error = pair
+        lines << "\nPage ##{page_identifier}: #{error.message}\n"
       end.join("\n")
     end
 

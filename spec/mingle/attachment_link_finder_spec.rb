@@ -26,7 +26,7 @@ module Mingle
 
         let(:description_html) { File.read(File.join(__dir__, '..', 'data', 'card_description.html')) }
         it "knows the HTML document" do
-          expect(@finder.card_description_document.to_html).to eq description_html
+          expect(@finder.document.to_html).to eq description_html
         end
 
     end

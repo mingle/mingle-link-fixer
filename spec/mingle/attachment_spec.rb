@@ -38,13 +38,22 @@ XML
 
       end
 
-
+      it "can find all by page identifier" do
+        http_stub.respond_to '/wiki/test_page/attachments.xml', with:<<-XML
+<attachments type="array">
+  <attachment>
+    <url>/attachments/5c6cc8db843c3276159c2d8ed400da58/88/zorro.pdf</url>
+    <file_name>zorro.pdf</file_name>
+  </attachment>
+  <attachment>
+    <url>/attachments/2dddd8db843c3276159c2d8ed400da58/88/osito.png</url>
+    <file_name>osito.png</file_name>
+  </attachment>
+</attachments>
+XML
+        attachments = Attachment.find_all_by_page_identifier('test_page')
+        expect(attachments.size).to eq 2
+      end
     end
-
-
-
-
   end
-
-
 end
